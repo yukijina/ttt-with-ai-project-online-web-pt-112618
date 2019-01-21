@@ -48,9 +48,8 @@ class Board
   end
 
   def update(num, player)
-    ##need to define class Player (token)
     valid_move?(num)
-    position(num)
+    self.cells[num.to_i - 1] = player.token
   end
 
 end
