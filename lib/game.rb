@@ -43,8 +43,9 @@ class Game
     end
   end
 
-
-
+  def draw?
+    true if !won?
+  end
 
 
 
