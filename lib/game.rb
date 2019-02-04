@@ -12,39 +12,30 @@ class Game
   end
 
   def won?
-    xo = self.board.cells.map.with_index(0) {|token, index| [token, index]}
-    #=> [["X",0], ["O",1], ["X",2], ["X",3], ["X",4], ["X",5], ["X", 6], ["X",7],["O",8]]
-
-    # "X" combination
-    x_arr = xo.select do |xo_arr|
-          xo_arr if xo_arr.first == "X"
-        end.transpose  #=>[["X","X"....],[0,3...] ]
-    x_arr = x_arr[1].combination(3).to_a  #=>[[0,3,5]...]
-
-    # "O" combination
-    o_arr = xo.select do |xo_arr|
-         xo_arr if xo_arr.first == "O"
-       end.transpose  #=>[["O","O"....],[1,2...] ]
-    o_arr = o_arr[1].combination(3).to_a #=>[[1,2,4]...]
-
-    #Cheking if "X" and "O" has winning combination
-    WIN_COMBINATIONS.detect do |win_comb|
-      if x_arr.include?(win_comb)
-        x_arr.select do |x|
-          win_comb if win_comb == x
-        end
-      elsif o_arr.include?(win_comb)
-        o_arr.select do |o|
-          win_comb if win_comb == o
-        end
-      else
-        false
+    result =WIN_COMBINATIONS.select do |win_comb|
+      if self.board.cells[win_comb[0]] == self.board.cells[win_comb[1]] &&  self.board.cells[win_comb[1]] == self.board.cells[win_comb[2]]
+        win_comb
       end
-    end
+    end.flatten
+    result == [] ? false : result
   end
 
   def draw?
-    true if !won?
+    !self.board.cells.include?(" ") && !won? ? true : false
+  end
+
+  def over?
+    draw? || won? ? true : false
+  end
+
+  def winner
+    if won?
+      if @winner = "X" && @winner != nil
+        "X"
+      elsif @winner = "O" && @winner != nil
+        "O"
+      end
+    end
   end
 
 
