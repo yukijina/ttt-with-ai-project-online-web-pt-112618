@@ -17,7 +17,7 @@ class Game
         win_comb
       end
     end.flatten
-    result == [] ? false : result
+    @result == [] ? false : result
   end
 
   def draw?
@@ -29,13 +29,7 @@ class Game
   end
 
   def winner
-    if won?
-      if @winner = "X" && @winner != nil
-        "X"
-      elsif @winner = "O" && @winner != nil
-        "O"
-      end
-    end
+    binding.pry
   end
 
 
