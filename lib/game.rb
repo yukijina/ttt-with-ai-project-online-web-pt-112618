@@ -18,7 +18,6 @@ class Game
       end
     end.flatten
     @result == [] ? false : @result
-
   end
 
   def draw?
@@ -55,8 +54,8 @@ class Game
 
   def play
     puts "Please type the number between 1 and 9: "
-
     while !over?
+
     input = self.current_player.move(board).to_i
     self.board.update(input, @current_player)
     turn
