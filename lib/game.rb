@@ -1,6 +1,6 @@
 class Game
   attr_accessor :board, :player_1, :player_2
-  attr_reader :current_player
+  #attr_reader :current_player
 
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6],[0,3,6],[1,4,7],[2,5,8]]
 
@@ -8,7 +8,11 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    @current_player = @player_1
+    #@current_player = @player_1
+  end
+
+  def current_player
+    self.board.turn_count % 2 == 0? player_1 : player_2
   end
 
   def won?
@@ -21,7 +25,8 @@ class Game
   end
 
   def draw?
-    !self.board.cells.include?(" ") && !won? ? true : false
+    #!self.board.cells.include?(" ") && !won? ? true : false
+    self.board.full? && !won?
   end
 
   def over?
@@ -41,26 +46,26 @@ class Game
   end
 
   def turn
-    if self.board.valid_move?(self.current_player.move(board).to_i)
-       if @current_player == @player_1
-          @current_player = @player_2
-       else
-         @current_player = @player_1
-       end
+    input = self.current_player.move(self.board).to_i
+    binding.pry
+    if self.board.valid_move?(input)
+      self.board.update(input, self.current_player)
+      self.current_player
     else
-      self.board.valid_move?(self.current_player.move(board).to_i)
+      puts "Please the number between 1 and 9:"
+      turn
     end
   end
 
   def play
     puts "Please type the number between 1 and 9: "
-    while !over?
-    input = self.current_player.move(board).to_i
-    self.board.update(input, @current_player)
-    turn
-    play
-    end
+    #turn
 
+    while !over?
+      #input = self.current_player.move(board).to_i
+      #self.board.update(input, self.current_player)
+      turn
+    end
   end
 
 
