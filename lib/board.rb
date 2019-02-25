@@ -45,6 +45,6 @@ class Board
     self.cells[num.to_i - 1] = player.token
     self
   end
-  binding.pry
+
 
 end
