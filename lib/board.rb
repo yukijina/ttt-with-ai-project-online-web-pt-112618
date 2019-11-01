@@ -23,17 +23,13 @@ class Board
 
   def full?
     self.cells.include?(" ") ? false : true
-    #self.cells.all? {|character| character == "X" || character == "O"}
   end
 
   def turn_count
     self.cells.delete_if {|cell| cell == " "}.size
-    #cells.count {|character| character == "X" || character == "O"}
   end
 
   def taken?(num)
-    #self.cells[num.to_i - 1] == " " ? false : true
-    #self.position(num) == " " ? false : true
     position(num) == "X" || position(num) == "O"
   end
 

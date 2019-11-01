@@ -1,6 +1,5 @@
 class Game
   attr_accessor :board, :player_1, :player_2, :current_player
-  #attr_reader :current_player
 
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6],[0,3,6],[1,4,7],[2,5,8]]
 
@@ -11,18 +10,8 @@ class Game
     @current_player = @player_1
   end
 
-  # def current_player
-  #   self.board.turn_count % 2 == 0? player_1 : player_2
-  # end
 
   def won?
-    # @result =WIN_COMBINATIONS.select do |win_comb|
-    #   if self.board.cells[win_comb[0]] == self.board.cells[win_comb[1]] &&  self.board.cells[win_comb[1]] == self.board.cells[win_comb[2]]
-    #     win_comb
-    #     binding.pry
-    #   end
-    # end.flatten
-    # @result == [] ? false : @result
     win_array = WIN_COMBINATIONS.detect do |win_comb|
       empty_string = " "
       self.board.cells[win_comb[0]] == self.board.cells[win_comb[1]] &&  self.board.cells[win_comb[1]] == self.board.cells[win_comb[2]] && self.board.cells[win_comb[0]] != empty_string
@@ -36,7 +25,6 @@ class Game
   end
 
   def draw?
-    #!self.board.cells.include?(" ") && !won? ? true : false
     self.board.full? && !won?
   end
 
